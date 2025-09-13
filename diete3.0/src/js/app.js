@@ -15,16 +15,16 @@ function mostrarProductos(listaProductos) {
     columna.className = 'col-md-4 mb-4';
 
     columna.innerHTML = `
-      <div class="card h-100 shadow-sm">
-        <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}" style="height: 200px; object-fit: cover;" />
+      <div class="card h-100">
+        <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}" />
         <div class="card-body">
           <h5 class="card-title">${producto.nombre}</h5>
           <p class="card-text"><strong>Precio:</strong> $${producto.precio}</p>
           <p class="card-text"><strong>Origen:</strong> ${producto.pais}</p>
         </div>
-        <div class="card-footer d-flex justify-content-between">
-          <button class="btn btn-sm btn-warning" onclick="abrirModalEdicion(${producto.id})">Editar</button>
-          <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${producto.id})">Eliminar</button>
+        <div class="card-footer">
+          <button class="btn btn-warning" onclick="abrirModalEdicion(${producto.id})">Editar</button>
+          <button class="btn btn-danger" onclick="eliminarProducto(${producto.id})">Eliminar</button>
         </div>
       </div>
     `;
@@ -94,12 +94,6 @@ function guardarProductoEditado() {
     alert('Producto editado correctamente.');
 }
 
-function deleteProduct(id) {
-  const index = products.findIndex(p => p.id === id);
-  if (index !== -1) {
-    products.splice(index, 1);
-  }
-}
 function eliminarProducto(id) {
   const indice = productos.findIndex(p => p.id === id);
   if (indice !== -1) {
@@ -107,6 +101,13 @@ function eliminarProducto(id) {
     mostrarProductos(productos);
     alert('Producto eliminado correctamente.');
   }
+}
+
+function limpiarTexto(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -164,12 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
     saveEditBtn.addEventListener('click', guardarProductoEditado);
   }
 
-  const searchBar = document.getElementById('searchBar');
+  const searchBar = document.getElementById('barraBusqueda');
   if (searchBar) {
     searchBar.addEventListener('input', () => {
-      const searchInput = searchBar.value.toLowerCase();
+      const searchInput = limpiarTexto(searchBar.value);
       const filtrados = productos.filter(producto =>
-        producto.nombre.toLowerCase().includes(searchInput)
+        limpiarTexto(producto.nombre).includes(searchInput)
       );
       mostrarProductos(filtrados);
     });

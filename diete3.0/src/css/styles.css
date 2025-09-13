@@ -29,7 +29,7 @@
 }
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-image: url('../images/noes.jpg');
+  background-image: url('../images/noes2.jpg');
   background-repeat: repeat;
   background-color: #f8fdf6;
   color: #333;
@@ -39,11 +39,13 @@ body {
   overflow-x: hidden;
   position: relative;
 }
+/* --- CONTENEDOR PRINCIPAL --- */
 .container {
   margin-top: 50px;
-  background-color: black;
-  opacity: 0.9;
-  border-radius: 16px;
+  background: linear-gradient(135deg, #f8ffec 60%, #e0f7fa 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  padding: 32px 24px;
 }
 input {
   background-color: white !important;
@@ -95,35 +97,55 @@ select:focus {
   margin: 0 auto;
 }
 .header-super-sano-content h1 {
- font-size: 2.8rem;
-  font-weight: bold;
-  color: #2e7d32;
-  padding: 0.5em 1em;
-  border: 4px solid #43a047;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #e8f5e9 60%, #c8e6c9 100%);
-  box-shadow: 0 6px 18px rgba(67, 160, 71, 0.25), 0 1px 0 #fff inset;
-  text-shadow: 2px 2px 8px #81c784, 0 1px 0 #fff;
-  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s, color 0.3s;
-  cursor: pointer;}
-.header-super-sano-content h1:hover {
-  color: #fff;
-  background: linear-gradient(135deg, #43a047 60%, #388e3c 100%);
-  border-color: #1b5e20;
-  box-shadow: 0 12px 32px rgba(67, 160, 71, 0.45), 0 2px 0 #fff inset;
-  transform: scale(1.05) rotate(-2deg);
-  text-shadow: 2px 2px 16px #1b5e20, 0 2px 0 #fff;}
-.header-super-sano-content p {
- font-size: 1.2rem;
-  font-weight: normal;
-  color: #1b5e20;
-  padding: 0.5em 1em;
-  border: 4px solid #2e7d32;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #c8e6c9 60%, #e8f5e9 100%);
-  box-shadow: inset 0 6px 18px rgba(67, 160, 71, 0.25), inset 0 -1px 0 #fff;
-  text-shadow: none;
-  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s, color 0.3s;
+  /* --- CARDS DE PRODUCTO --- */
+  .card {
+    background: linear-gradient(135deg, #ffffff 60%, #e3f6fd 100%);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    border: none;
+    position: relative;
+  }
+  .card:hover {
+    transform: scale(1.04) translateY(-4px);
+    box-shadow: 0 16px 48px rgba(44, 62, 80, 0.28);
+  }
+  .card-img-top {
+    border-bottom: 3px solid #43a047;
+    object-fit: cover;
+    height: 220px;
+    width: 100%;
+    background: #e0f7fa;
+  }
+  .card-body {
+    padding: 1.5rem 1.2rem;
+    color: #263238;
+    background: linear-gradient(135deg, #e8f5e9 60%, #c8e6c9 100%);
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 2px 8px rgba(67, 160, 71, 0.08);
+  }
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #388e3c;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 6px #c8e6c9;
+  }
+  .card-text {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #455a64;
+  }
+  .card-footer {
+    background: linear-gradient(90deg, #43a047 60%, #388e3c 100%);
+    border-top: none;
+    padding: 1rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 24px 24px;
+  }
   cursor: default;}
 .header-super-sano-content p:hover {
   color: #2e7d32;
@@ -203,39 +225,53 @@ header div p, h1 {
 
 
 .card {
-  background-color: rgba(240, 239, 198, 0.95);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1), inset 0 0 30px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(44, 62, 80, 0.13);
+  transition: transform 0.25s, box-shadow 0.25s;
   overflow: hidden;
+  border: none;
+  position: relative;
+  margin-bottom: 24px;
 }
 .card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 12px 36px rgba(44, 62, 80, 0.22);
 }
 .card-img-top {
-  border-bottom: 1px solid #c8e6c9;
+  border-bottom: 3px solid #43a047;
   object-fit: cover;
-  height: 200px;
+  height: 210px;
   width: 100%;
+  background: #f4fff4;
 }
 .card-body {
-  padding: 1rem;
-  color: #2e7d32;
+  padding: 1.3rem 1.1rem;
+  color: #1b5e20;
+  background: #f8fdf6;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 1px 4px rgba(67, 160, 71, 0.06);
 }
 .card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #388e3c;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 1px 4px #c8e6c9;
 }
 .card-text {
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  color: #2e7d32;
 }
 .card-footer {
-  background-color: #e8f5e9;
-  border-top: 1px solid #c8e6c9;
-  padding: 0.75rem 1rem;
+  background: #f4fff4;
+  border-top: 1px solid #e0f7fa;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 20px 20px;
 }
 .btn-success {
   background-color: #4caf50;
@@ -246,20 +282,26 @@ header div p, h1 {
   border-color: #43a047;
 }
 .btn-warning {
-  background-color: #fcd675;
-  border-color: #fcd675;
+  background: #ffd600;
+  color: #263238;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 214, 0, 0.10);
 }
 .btn-warning:hover {
-  background-color: #f9a825;
-  border-color: #f9a825;
+  background: #ffb300;
+  color: #fff;
 }
 .btn-danger {
-  background-color: #ff625f;
-  border-color: #ff625f;
+  background: #e53935;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.10);
 }
 .btn-danger:hover {
-  background-color: #e90707b7;
-  border-color: #e90707b7;
+  background: #d32f2f;
+  color: #ffd600;
 }
 .modal-content {
   border-radius: 10px;
