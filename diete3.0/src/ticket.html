@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket de Compra - Super Sano</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="ticket-header">
+    <h2>Super Sano</h2>
+    <p>Ticket de compra - Consumidor final</p>
+    <p id="ticket-fecha"></p>
+    
+  </header>
+
+  <main class="ticket-container">
+    <form id="datosCliente" class="ticket-form">
+      <fieldset class="ticket-info">
+        <legend>Datos del Cliente</legend>
+        <label for="clienteNombre">Nombre:</label>
+        <input type="text" id="clienteNombre" required />
+
+        <label for="clienteDni">DNI:</label>
+        <input type="text" id="clienteDni" required />
+
+        <label for="clienteEmail">Email:</label>
+        <input type="email" id="clienteEmail" required />
+      </fieldset>
+      <button type="submit" class="btn-print">Generar Ticket</button>
+    </form>
+
+    <section id="ticketDetalle" style="display:none;">
+      <table class="ticket-table" id="ticketProductos">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cant.</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="ticket-total" id="ticketTotal"></div>
+
+      <footer class="ticket-footer">
+        <p>¡Gracias por tu compra!</p>
+        <p>Super Sano - Buenos Aires</p>
+      </footer>
+
+      <button onclick="window.print()" class="btn-print">Imprimir Ticket</button>
+    </section>
+  </main>
+  <nav>
+      <a href="index.html" class="btn-back">← Volver al inicio</a>
+    </nav>
+
+  <script src="js/ticket.js"></script>
+</body>
+</html>

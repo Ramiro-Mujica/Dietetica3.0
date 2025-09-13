@@ -3,8 +3,7 @@ import productos from '../data/products.js';
 let siguienteId = productos.length + 1;
 let idEdicionActual = null;
 
-// Mostrar productos al cargar la página
-// ...eliminar duplicado...
+
 
 function mostrarProductos(listaProductos) {
   const contenedorTarjetas = document.getElementById('contenedorTarjetasProducto');
@@ -23,11 +22,51 @@ function mostrarProductos(listaProductos) {
           <p class="card-text"><strong>Origen:</strong> ${producto.pais}</p>
         </div>
         <div class="card-footer">
+          <button class="btn btn-success" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
           <button class="btn btn-warning" onclick="abrirModalEdicion(${producto.id})">Editar</button>
           <button class="btn btn-danger" onclick="eliminarProducto(${producto.id})">Eliminar</button>
         </div>
       </div>
     `;
+let carrito = [];
+
+function agregarAlCarrito(id) {
+  const producto = productos.find(p => p.id === id);
+  if (!producto) return;
+  const existente = carrito.find(item => item.id === id);
+  if (existente) {
+    existente.cantidad += 1;
+  } else {
+    carrito.push({ ...producto, cantidad: 1 });
+  }
+  mostrarCarritoFlotante();
+}
+
+function mostrarCarritoFlotante() {
+  let boton = document.getElementById('carrito-flotante');
+  if (!boton) {
+    boton = document.createElement('button');
+    boton.id = 'carrito-flotante';
+    boton.className = 'btn btn-success';
+    boton.style.position = 'fixed';
+    boton.style.bottom = '32px';
+    boton.style.right = '32px';
+    boton.style.zIndex = '2000';
+    boton.style.boxShadow = '0 4px 16px rgba(44,62,80,0.18)';
+    boton.onclick = abrirResumenCarrito;
+    document.body.appendChild(boton);
+  }
+  const total = carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
+  const cantidad = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
+  boton.innerHTML = `🛒 Carrito (${cantidad})<br><strong>Total: $${total}</strong>`;
+}
+
+function abrirResumenCarrito() {
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  window.location.href = 'ticket.html';
+}
+
+window.agregarAlCarrito = agregarAlCarrito;
 
     contenedorTarjetas.appendChild(columna);
   });
@@ -65,7 +104,6 @@ function guardarProductoEditado() {
   const nuevoPais = inputPais.value.trim();
   const nuevoArchivoImagen = inputImagen ? inputImagen.files[0] : null;
 
-  // Validaciones
   if (!nuevoNombre) {
     alert('El nombre no puede estar vacío.');
     inputNombre.focus();
