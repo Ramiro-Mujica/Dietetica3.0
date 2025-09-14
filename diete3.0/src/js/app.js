@@ -7,6 +7,10 @@ let idEdicionActual = null;
 
 function mostrarProductos(listaProductos) {
   const contenedorTarjetas = document.getElementById('contenedorTarjetasProducto');
+  if (!contenedorTarjetas) {
+    console.error('No se encontró el elemento #contenedorTarjetasProducto en el DOM.');
+    return;
+  }
   contenedorTarjetas.innerHTML = '';
 
   listaProductos.forEach(producto => {
@@ -148,56 +152,61 @@ function limpiarTexto(texto) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('DOMContentLoaded', function() {
   mostrarProductos(productos);
 
-  document.getElementById('formularioProducto').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const inputNombre = document.getElementById('nombreProducto');
-    const inputPrecio = document.getElementById('precioProducto');
-    const inputPais = document.getElementById('paisProducto');
-    const inputImagen = document.getElementById('archivoImagenProducto');
+  const formularioProducto = document.getElementById('formularioProducto');
+  if (formularioProducto) {
+    formularioProducto.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const inputNombre = document.getElementById('nombreProducto');
+      const inputPrecio = document.getElementById('precioProducto');
+      const inputPais = document.getElementById('paisProducto');
+      const inputImagen = document.getElementById('archivoImagenProducto');
 
-    const nombre = inputNombre.value.trim();
-    const precio = parseInt(inputPrecio.value);
-    const pais = inputPais.value.trim();
-    const archivoImagen = inputImagen.files[0];
+      const nombre = inputNombre.value.trim();
+      const precio = parseInt(inputPrecio.value);
+      const pais = inputPais.value.trim();
+      const archivoImagen = inputImagen.files[0];
 
-    if (!nombre) {
-      alert('El nombre no puede estar vacío.');
-      inputNombre.focus();
-      return;
-    }
-    if (isNaN(precio) || precio <= 0) {
-      alert('El precio debe ser mayor a cero.');
-      inputPrecio.focus();
-      return;
-    }
-    if (!pais) {
-      alert('El país no puede estar vacío.');
-      inputPais.focus();
-      return;
-    }
-    if (!archivoImagen) {
-      alert('Debes seleccionar una imagen.');
-      inputImagen.focus();
-      return;
-    }
+      if (!nombre) {
+        alert('El nombre no puede estar vacío.');
+        inputNombre.focus();
+        return;
+      }
+      if (isNaN(precio) || precio <= 0) {
+        alert('El precio debe ser mayor a cero.');
+        inputPrecio.focus();
+        return;
+      }
+      if (!pais) {
+        alert('El país no puede estar vacío.');
+        inputPais.focus();
+        return;
+      }
+      if (!archivoImagen) {
+        alert('Debes seleccionar una imagen.');
+        inputImagen.focus();
+        return;
+      }
 
-    const urlImagen = URL.createObjectURL(archivoImagen);
-    const nuevoProducto = {
-      id: siguienteId++,
-      nombre,
-      precio,
-      pais,
-      imagen: urlImagen,
-      tipo: '',
-    };
-    productos.push(nuevoProducto);
-    mostrarProductos(productos);
-    document.getElementById('formularioProducto').reset();
-    alert('Producto agregado correctamente.');
-  });
+      const urlImagen = URL.createObjectURL(archivoImagen);
+      const nuevoProducto = {
+        id: siguienteId++,
+        nombre,
+        precio,
+        pais,
+        imagen: urlImagen,
+        tipo: '',
+      };
+      productos.push(nuevoProducto);
+      mostrarProductos(productos);
+      formularioProducto.reset();
+      alert('Producto agregado correctamente.');
+    });
+  }
+
   const saveEditBtn = document.getElementById('saveEditBtn');
   if (saveEditBtn) {
     saveEditBtn.addEventListener('click', guardarProductoEditado);
@@ -205,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const searchBar = document.getElementById('barraBusqueda');
   if (searchBar) {
-    searchBar.addEventListener('input', () => {
+    searchBar.addEventListener('input', function() {
       const searchInput = limpiarTexto(searchBar.value);
       const filtrados = productos.filter(producto =>
         limpiarTexto(producto.nombre).includes(searchInput)

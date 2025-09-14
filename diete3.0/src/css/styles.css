@@ -364,6 +364,7 @@ input:focus, select:focus {
 
 /* === TICKET HEADER === */
 .ticket-header {
+  margin-top: -100px;
   background: linear-gradient(135deg, var(--primary-green), var(--light-green));
   color: white;
   text-align: center;
@@ -405,6 +406,7 @@ input:focus, select:focus {
 .ticket-container {
   max-width: 600px;
   margin: 30px auto;
+  margin-top: 50px;
   background: white;
   border-radius: 0 0 20px 20px;
   box-shadow: 0 8px 30px var(--shadow);
@@ -530,7 +532,7 @@ input:focus, select:focus {
   padding: 20px;
   background: linear-gradient(145deg, var(--bg-green), rgba(200, 230, 201, 0.5));
   border-radius: 10px;
-  border: 2px dashed var(--accent-green);
+  
 }
 
 .ticket-footer p {
@@ -594,9 +596,10 @@ nav {
 
 .btn-back:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  background: linear-gradient(45deg, #1e57f3, #6d9efa);
+  box-shadow: 0 8px 25px rgba(69, 101, 207, 0.959);
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 /* === EFECTOS PARA TICKET === */
